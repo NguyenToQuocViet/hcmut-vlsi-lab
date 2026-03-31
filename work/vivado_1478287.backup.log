@@ -1,0 +1,39 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Mar 31 15:58:06 2026
+# Process ID         : 1478287
+# Current directory  : /home/quocviet/Project/vlsi_lab/work
+# Command line       : vivado -mode batch -source ../create_project.tcl -tclargs vlsi_lab
+# Log file           : /home/quocviet/Project/vlsi_lab/work/vivado.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/work/vivado.jou
+# Running On         : quocviet-workstation
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
+# CPU Frequency      : 3862.185 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 33453 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59223 MB
+# Available Virtual  : 50973 MB
+#-----------------------------------------------------------
+source ../create_project.tcl
+# set project_name [file tail [file dirname [pwd]]]
+# create_project ${project_name} . -force -part xc7z020clg400-1
+# add_files ../rtl
+# add_files -fileset constrs_1 -norecurse ../constrs/timing.xdc
+# set_property file_type SystemVerilog [get_files -filter {NAME =~ *.sv}]
+# if {[file exists ../tb]} {
+#     add_files -fileset sim_1 ../tb
+#     set_property file_type SystemVerilog [get_files -of_objects [get_filesets sim_1] -filter {NAME =~ *.sv}]
+# }
+# update_compile_order -fileset sources_1
+# update_compile_order -fileset sim_1
+# puts "SUCCESS: Project created and source files added recursively."
+SUCCESS: Project created and source files added recursively.
+# close_project
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 31 15:58:10 2026...

@@ -1,0 +1,1 @@
+-debug "typical" "ring_flasher_tb" -s "ring_flasher_tb_snap" 

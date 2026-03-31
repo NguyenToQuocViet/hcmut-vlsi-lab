@@ -1,0 +1,8 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/quocviet/Project/vlsi_lab/rtl/ring_flasher_pkg.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/quocviet/Project/vlsi_lab/rtl/ring_flasher.sv" into library work
+INFO: [VRFC 10-311] analyzing module counter
+INFO: [VRFC 10-311] analyzing module ring_flasher
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/quocviet/Project/vlsi_lab/tb/ring_flasher_tb.sv" into library work
+INFO: [VRFC 10-311] analyzing module ring_flasher_tb
+WARNING: [VRFC 10-3824] variable 'on_cnt' must explicitly be declared as automatic or static [/home/quocviet/Project/vlsi_lab/tb/ring_flasher_tb.sv:133]
+WARNING: [VRFC 10-3824] variable 'on_cnt' must explicitly be declared as automatic or static [/home/quocviet/Project/vlsi_lab/tb/ring_flasher_tb.sv:147]

@@ -1,0 +1,54 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Mar 31 16:00:25 2026
+# Process ID         : 1481899
+# Current directory  : /home/quocviet/Project/vlsi_lab/work
+# Command line       : vivado -mode batch -source ../tcl/sim.tcl
+# Log file           : /home/quocviet/Project/vlsi_lab/work/vivado.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/work/vivado.jou
+# Running On         : quocviet-workstation
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
+# CPU Frequency      : 3958.916 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 33453 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59223 MB
+# Available Virtual  : 51024 MB
+#-----------------------------------------------------------
+source ../tcl/sim.tcl
+# set top "ring_flasher_tb"
+# set src_files [glob -nocomplain ../rtl/*_pkg.sv]
+# foreach f [glob -nocomplain ../rtl/*.sv] {
+#     if {[string first "_pkg.sv" $f] == -1} { lappend src_files $f }
+# }
+# set tb_files [glob -nocomplain ../tb/*.sv]
+# if {[llength $tb_files] == 0} {
+#     puts "ERROR: No testbench found in ../tb/. Create ../tb/${top}.sv first."
+#     exit 1
+# }
+# set all_files [concat $src_files $tb_files]
+# puts "Files: $all_files"
+Files: ../rtl/ring_flasher_pkg.sv ../rtl/ring_flasher.sv ../tb/ring_flasher_tb.sv
+# puts "========== Compiling =========="
+========== Compiling ==========
+# exec xvlog -sv -d SIMULATION {*}$all_files >@stdout 2>@stderr
+# puts "========== Elaborating =========="
+========== Elaborating ==========
+# exec xelab -debug typical $top -s ${top}_snap >@stdout 2>@stderr
+# puts "========== Simulating =========="
+========== Simulating ==========
+# if {[string match "*gui*" $rdi::mode]} {
+#     exec xsim ${top}_snap -gui >@stdout 2>@stderr
+#     puts "Waveform opened. Close manually when done."
+# } else {
+#     exec xsim ${top}_snap -R >@stdout 2>@stderr
+#     puts "SUCCESS: Simulation completed."
+# }
+SUCCESS: Simulation completed.
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 31 16:00:32 2026...
