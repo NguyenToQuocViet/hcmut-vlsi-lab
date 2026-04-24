@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Apr  7 10:23:53 2026
+# Process ID         : 3139527
+# Current directory  : /home/quocviet/Project/vlsi_lab/work
+# Command line       : xsim -mode tcl -source {xsim.dir/ring_flasher_tb_snap/xsim_script.tcl}
+# Log file           : /home/quocviet/Project/vlsi_lab/work/xsim.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/work/xsim.jou
+# Running On         : quocviet-workstation
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
+# CPU Frequency      : 4000.073 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 33453 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59223 MB
+# Available Virtual  : 54827 MB
+#-----------------------------------------------------------
+source xsim.dir/ring_flasher_tb_snap/xsim_script.tcl
+run -all

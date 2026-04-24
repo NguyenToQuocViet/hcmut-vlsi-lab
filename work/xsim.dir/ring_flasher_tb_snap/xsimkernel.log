@@ -1,7 +1,0 @@
-Running: xsim.dir/ring_flasher_tb_snap/xsimk -runall -simmode gui -wdb ring_flasher_tb_snap.wdb -simrunnum 0 -socket 59937
-Design successfully loaded
-Design Loading Memory Usage: 197728 KB (Peak: 197784 KB)
-Design Loading CPU Usage: 760 ms
-Simulation completed
-Simulation Memory Usage: 288436 KB (Peak: 336996 KB)
-Simulation CPU Usage: 770 ms

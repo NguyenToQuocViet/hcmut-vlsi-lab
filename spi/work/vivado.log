@@ -1,0 +1,58 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Fri Apr 24 16:03:33 2026
+# Process ID         : 1156349
+# Current directory  : /home/quocviet/Project/vlsi_lab/spi/work
+# Command line       : vivado -mode batch -source ../../create_project.tcl -tclargs spi
+# Log file           : /home/quocviet/Project/vlsi_lab/spi/work/vivado.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/spi/work/vivado.jou
+# Running On         : quocviet-workstation
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
+# CPU Frequency      : 4000.000 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 33453 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59223 MB
+# Available Virtual  : 50740 MB
+#-----------------------------------------------------------
+source ../../create_project.tcl
+# set project_name [file tail [file dirname [pwd]]]
+# create_project ${project_name} . -force -part xc7z020clg400-1
+# if {[file isdirectory ../rtl]} {
+#     add_files ../rtl
+# } else {
+#     puts "WARNING: ../rtl not found — skipping RTL add_files"
+# }
+# if {[file isdirectory ../constrs]} {
+#     set xdc_files [glob -nocomplain ../constrs/*.xdc]
+#     if {[llength $xdc_files] > 0} {
+#         add_files -fileset constrs_1 -norecurse $xdc_files
+#         puts "Loaded [llength $xdc_files] XDC file(s)"
+#     } else {
+#         puts "NOTE: ../constrs exists but contains no *.xdc — skipping"
+#     }
+# } else {
+#     puts "NOTE: ../constrs not found — timing will be unconstrained"
+# }
+NOTE: ../constrs not found — timing will be unconstrained
+# if {[file isdirectory ../tb]} {
+#     add_files -fileset sim_1 ../tb
+# }
+# set all_sv [get_files -filter {NAME =~ *.sv}]
+# if {[llength $all_sv] > 0} {
+#     set_property file_type SystemVerilog $all_sv
+# }
+# update_compile_order -fileset sources_1
+# if {[llength [get_filesets -quiet sim_1]] > 0} {
+#     update_compile_order -fileset sim_1
+# }
+# puts "SUCCESS: Project '$project_name' created. Open via: make open"
+SUCCESS: Project 'spi' created. Open via: make open
+# close_project
+INFO: [Common 17-206] Exiting Vivado at Fri Apr 24 16:03:37 2026...

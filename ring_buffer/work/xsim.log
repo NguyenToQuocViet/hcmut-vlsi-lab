@@ -1,0 +1,87 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Apr  7 10:23:53 2026
+# Process ID         : 3139527
+# Current directory  : /home/quocviet/Project/vlsi_lab/work
+# Command line       : xsim -mode tcl -source {xsim.dir/ring_flasher_tb_snap/xsim_script.tcl}
+# Log file           : /home/quocviet/Project/vlsi_lab/work/xsim.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/work/xsim.jou
+# Running On         : quocviet-workstation
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
+# CPU Frequency      : 4000.073 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 33453 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59223 MB
+# Available Virtual  : 54827 MB
+#-----------------------------------------------------------
+source xsim.dir/ring_flasher_tb_snap/xsim_script.tcl
+# xsim {ring_flasher_tb_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+
+── TC1: Reset ──
+[PASS] TC1.1 state=IDLE
+[PASS] TC1.2 pos_ptr=15
+[PASS] TC1.3 leds=0
+[PASS] TC1.4 all brightness=0
+
+── TC2: IDLE hold (rep=0) ──
+[PASS] TC2.1 still IDLE
+[PASS] TC2.2 leds still off
+
+── TC3: IDLE → FORWARD ──
+[PASS] TC3.1 state=FORWARD
+
+── TC4: FORWARD step 1 ──
+[PASS] TC4.1 pos_ptr=0
+[PASS] TC4.2 led[0] brightness=max
+[PASS] TC4.3 led[1] brightness=0
+
+── TC5: FORWARD step 2 ──
+[PASS] TC5.1 pos_ptr=1
+[PASS] TC5.2 led[1] brightness=max
+[PASS] TC5.3 led[0] decayed to 4
+
+── TC6: FORWARD → BACKWARD ──
+[PASS] TC6.1 state=BACKWARD
+[FAIL] TC6.2 pos_ptr=11  (time=60701000)
+[FAIL] TC6.3 led[11] brightness=max  (time=60701000)
+
+── TC7: BACKWARD step 1 ──
+[FAIL] TC7.1 pos_ptr=10  (time=64701000)
+[FAIL] TC7.2 led[10] brightness=max  (time=64701000)
+[FAIL] TC7.3 led[11] decayed to 4  (time=64701000)
+
+── TC8: BACKWARD → FORWARD loop (rep=1) ──
+[PASS] TC8.1 state=FORWARD
+[FAIL] TC8.2 step_cnt=0  (time=92701000)
+
+── TC9: BACKWARD → DECAY (rep=0) ──
+[PASS] TC9.0 entered BACKWARD
+[PASS] TC9.1 state=DECAY
+
+── TC10: DECAY → IDLE ──
+[PASS] TC10.1 state=IDLE
+[PASS] TC10.2 all brightness=0
+[PASS] TC10.3 leds all off
+
+── TC11: PWM max brightness ──
+[FAIL] TC11.0 led[0].brightness=5  (time=200701000)
+[FAIL] TC11.1 led[0] on 5/5 PWM cycles  (time=201701000)
+
+── TC12: PWM zero brightness ──
+[PASS] TC12.0 led[15].brightness=0
+[PASS] TC12.1 led[15] off 5/5 PWM cycles
+
+========== 22 passed, 8 failed ==========
+$finish called at time : 202701 ns : File "/home/quocviet/Project/vlsi_lab/tb/ring_flasher_tb.sv" Line 160
+exit
+INFO: xsimkernel Simulation Memory Usage: 288436 KB (Peak: 336996 KB), Simulation CPU Usage: 770 ms
+INFO: [Common 17-206] Exiting xsim at Tue Apr  7 10:23:55 2026...
