@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/quocviet/Project/vlsi_lab/spi/rtl/spi_master.sv" into library work
+INFO: [VRFC 10-311] analyzing module spi_master
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/quocviet/Project/vlsi_lab/spi/rtl/spi_slave.sv" into library work
+INFO: [VRFC 10-311] analyzing module spi_slave
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/quocviet/Project/vlsi_lab/spi/tb/spi_tb.sv" into library work
+INFO: [VRFC 10-311] analyzing module spi_tb

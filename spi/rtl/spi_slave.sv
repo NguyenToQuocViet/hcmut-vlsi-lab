@@ -22,10 +22,9 @@ module spi_slave
     logic [7:0] tx_load_reg;
     logic [7:0] tx_shift_reg;
     logic [7:0] rx_reg;
-    logic [7:0] rx_next;
+    logic       first_bit;
 
-    assign rx_next = {rx_reg[6:0], mosi};
-
+    //system domain: latch TX data when idle
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             tx_load_reg <= '0;
@@ -33,23 +32,34 @@ module spi_slave
             tx_load_reg <= in;
     end
 
+    //tx shift — negedge sclk
+    always_ff @(negedge sclk or posedge cs or negedge rst_n) begin
+        if (!rst_n) begin
+            tx_shift_reg    <= '0;
+            first_bit       <= 1'b1;
+        end else if (cs) begin
+            tx_shift_reg    <= tx_load_reg;
+            first_bit       <= 1'b1;
+        end else begin
+            if (first_bit) begin
+                tx_shift_reg    <= {tx_load_reg[6:0], 1'b0};
+                first_bit       <= 1'b0;
+            end else begin
+                tx_shift_reg    <= {tx_shift_reg[6:0], 1'b0};
+            end
+        end
+    end
+
+    //rx shift — posedge sclk
     always_ff @(posedge sclk or negedge rst_n) begin
         if (!rst_n)
-            rx_reg <= '0;
+            rx_reg  <= '0;
         else if (!cs)
-            rx_reg <= rx_next;
+            rx_reg  <= {rx_reg[6:0], mosi};
     end
 
-    always_ff @(negedge sclk or posedge cs or negedge rst_n) begin
-        if (!rst_n)
-            tx_shift_reg <= '0;
-        else if (cs)
-            tx_shift_reg <= tx_load_reg;
-        else
-            tx_shift_reg <= {tx_shift_reg[6:0], 1'b0};
-    end
-
-    assign ready = cs;
-    assign miso  = tx_shift_reg[7];
-    assign out   = (!cs) ? rx_next : rx_reg;
+    //output
+    assign miso     = cs ? 1'b0 : (first_bit ? tx_load_reg[7] : tx_shift_reg[7]);
+    assign ready    = cs;
+    assign out      = rx_reg;
 endmodule

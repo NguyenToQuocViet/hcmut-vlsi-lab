@@ -1,0 +1,1 @@
+-debug "typical" "spi_tb" -s "spi_tb_snap" 

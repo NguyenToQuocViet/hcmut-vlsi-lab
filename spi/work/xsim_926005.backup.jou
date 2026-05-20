@@ -1,24 +1,25 @@
 #-----------------------------------------------------------
-# Vivado v2025.2 (64-bit)
+# xsim v2025.2 (64-bit)
 # SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Wed May 20 13:28:03 2026
-# Process ID         : 928770
+# Start of session at: Wed May 20 13:26:37 2026
+# Process ID         : 926005
 # Current directory  : /home/quocviet/Project/vlsi_lab/spi/work
-# Command line       : vivado -mode batch -source ../tcl/sim.tcl -tclargs spi_tb
-# Log file           : /home/quocviet/Project/vlsi_lab/spi/work/vivado.log
-# Journal file       : /home/quocviet/Project/vlsi_lab/spi/work/vivado.jou
+# Command line       : xsim -mode tcl -source {xsim.dir/spi_tb_snap/xsim_script.tcl}
+# Log file           : /home/quocviet/Project/vlsi_lab/spi/work/xsim.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/spi/work/xsim.jou
 # Running On         : quocviet-workstation
 # Platform           : Ubuntu
 # Operating System   : Ubuntu 24.04.4 LTS
 # Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
-# CPU Frequency      : 2033.862 MHz
+# CPU Frequency      : 4000.000 MHz
 # CPU Physical cores : 6
 # CPU Logical cores  : 12
 # Host memory        : 33453 MB
 # Swap memory        : 25769 MB
 # Total Virtual      : 59223 MB
-# Available Virtual  : 53330 MB
+# Available Virtual  : 53296 MB
 #-----------------------------------------------------------
-source ../tcl/sim.tcl
+source xsim.dir/spi_tb_snap/xsim_script.tcl
+run -all

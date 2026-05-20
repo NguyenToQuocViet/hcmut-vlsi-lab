@@ -1,5 +1,7 @@
+`timescale 1ns/1ps
+
 module spi_master
-(   
+(
     //system interface
     input logic         ref_clk,
     input logic         rst_n,
@@ -9,40 +11,31 @@ module spi_master
 
     input logic [1:0]   cntl,
     output logic        ready,
-    
+
     //slave interface
     output logic        s_clk,
 
     output logic        mosi,
     input logic         miso,
- 
+
     output logic [7:0]  ss
 );
-    //shift register
+    //shift registers
     logic [7:0] tx_reg;
+    logic [7:0] rx_reg;
 
-    //timer
-    logic       trans_start;
-    logic [2:0] timer;
+    //bit counter
+    logic [2:0] bit_cnt;
 
-    always_ff @(posedge ref_clk) begin
-        if (!rst_n) begin
-            timer   <= '0;
-        end else if (trans_start) begin
-            timer   <= timer + 1'b1;
-        end else begin  //reset khi khong transfer
-            timer   <= '0;
-        end
-    end
-    
-    typedef enum logic [1:0] {
+    typedef enum logic [2:0] {
         IDLE,
+        LOAD_SS,
         TRANSFER,
         WAIT_CLEAR
     } state_t;
 
     state_t state, next_state;
-    
+
     //state update
     always_ff @(posedge ref_clk) begin
         if (!rst_n)
@@ -59,15 +52,18 @@ module spi_master
         case (state)
             IDLE: begin
                 if (cntl == 2'b11)
-                    next_state  = TRANSFER;
+                    next_state  = LOAD_SS;
+            end
+
+            LOAD_SS: begin
+                next_state  = TRANSFER;
             end
 
             TRANSFER: begin
-                if (timer == 3'b111)
+                if (bit_cnt == 3'd7)
                     next_state  = WAIT_CLEAR;
             end
-            
-            //state nay de guard resend do system khong chuyen ctnl ve 0
+
             WAIT_CLEAR: begin
                 if (cntl == 2'b00)
                     next_state  = IDLE;
@@ -77,64 +73,57 @@ module spi_master
         endcase
     end
 
-    //output fsm
-    always_comb begin
-        //default   
-        trans_start = 1'b0;
-        ready       = 1'b1;
-
-        case (state)
-            IDLE: begin
-                //ready       = 1'b1;
-            end
-
-            TRANSFER: begin
-                trans_start  = 1'b1;
-                ready        = 1'b0;
-            end
-
-            WAIT_CLEAR: begin
-                //trans_start = 1'b0;
-                ready       = 1'b0;
-            end
-
-            default:;
-        endcase
+    //bit counter
+    always_ff @(posedge ref_clk) begin
+        if (!rst_n)
+            bit_cnt <= '0;
+        else if (state == TRANSFER)
+            bit_cnt <= bit_cnt + 1'b1;
+        else
+            bit_cnt <= '0;
     end
 
-    //load logic
+    //ready
+    assign ready = (state == IDLE);
+
+    //tx shift register
     always_ff @(posedge ref_clk) begin
-        /*if (state == IDLE) begin
-            if (cntl == 2'b01)
-                tx_reg  <= in;
-        end else if (state == TRANSFER) begin
-            tx_reg  <= {tx_reg[6:0], miso};
-        end*/
+        if (!rst_n)
+            tx_reg  <= '0;
+        else begin
+            case (state)
+                IDLE: begin
+                    if (cntl == 2'b01)
+                        tx_reg  <= in;
+                end
 
-        case (state)
-            IDLE: begin
-                if (cntl == 2'b01)
-                    tx_reg  <= in;
-            end
+                TRANSFER: begin
+                    tx_reg  <= {tx_reg[6:0], 1'b0};
+                end
 
-            TRANSFER: begin
-                tx_reg  <= {tx_reg[6:0], miso};
-            end
+                default:;
+            endcase
+        end
+    end
 
-            default:;
-        endcase
-    end     
-    
+    //rx shift register — sample miso on negedge ref_clk (= posedge s_clk)
+    always_ff @(negedge ref_clk) begin
+        if (!rst_n)
+            rx_reg  <= '0;
+        else if (state == TRANSFER)
+            rx_reg  <= {rx_reg[6:0], miso};
+    end
+
     //slave select logic
     logic [7:0] slave_idx;
 
     always_ff @(posedge ref_clk) begin
-        if (!rst_n) begin
+        if (!rst_n)
             slave_idx   <= 8'hFF;
-        end else if (state == IDLE && cntl == 2'b10)
+        else if (state == IDLE && cntl == 2'b10)
             slave_idx   <= in;
     end
-    
+
     logic [7:0] slave_onehot;
 
     always_comb begin
@@ -145,19 +134,9 @@ module spi_master
             slave_onehot    = ~(8'b1 << slave_idx[2:0]);
     end
 
-    assign ss   = (state == TRANSFER) ? slave_onehot : 8'hFF;
-    
-    /*
-    //transfer logic
-    always_ff @(posedge ref_clk) begin
-        if (state == TRANSFER) begin
-            //mosi        <= tx_reg[7];
-            tx_reg      <= {tx_reg[6:0], miso};
-        end
-    end*/
-
     //output
     assign mosi     = tx_reg[7];
-    assign out      = tx_reg;
-    assign s_clk    = (state == TRANSFER) ? ref_clk : 1'b0; //gate s_clk
+    assign out      = rx_reg;
+    assign ss       = (state == LOAD_SS || state == TRANSFER) ? slave_onehot : 8'hFF;
+    assign s_clk    = (state == TRANSFER) ? ~ref_clk : 1'b0;
 endmodule

@@ -1,0 +1,53 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed May 20 13:27:20 2026
+# Process ID         : 927508
+# Current directory  : /home/quocviet/Project/vlsi_lab/spi/work
+# Command line       : xsim -mode tcl -source {xsim.dir/spi_tb_snap/xsim_script.tcl}
+# Log file           : /home/quocviet/Project/vlsi_lab/spi/work/xsim.log
+# Journal file       : /home/quocviet/Project/vlsi_lab/spi/work/xsim.jou
+# Running On         : quocviet-workstation
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i5-12400F
+# CPU Frequency      : 3963.772 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 33453 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59223 MB
+# Available Virtual  : 53297 MB
+#-----------------------------------------------------------
+source xsim.dir/spi_tb_snap/xsim_script.tcl
+# xsim {spi_tb_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS [1]: master ready after reset
+PASS [2]: slave0 ready after reset
+PASS [3]: slave1 ready after reset
+PASS [4]: ss inactive after reset
+PASS [5]: sclk low after reset
+PASS [6]: master load tx data
+m_out=3c s0_out=a5
+PASS [7]: master rx == slave tx (0x3C)
+PASS [8]: slave0 rx == master tx (0xA5)
+m_out=bb s1_out=55
+PASS [9]: master rx == slave1 tx (0xBB)
+PASS [10]: slave1 rx == master tx (0x55)
+PASS [11]: invalid slave idx -> ss=FF during transfer
+PASS [12]: wait_clear: ready stays 0 while cntl=11
+PASS [13]: wait_clear: ready=1 after cntl released
+PASS [14]: slave preload blocked during cs=0
+PASS [15]: loopback: master rx == master tx (0xC3)
+PASS [16]: loopback: slave rx == slave tx (0xC3)
+PASS [17]: back2back tx2: slave rx (0x99)
+PASS [18]: back2back tx2: master rx (0xAB)
+
+SPI TB DONE: pass=18 fail=0
+$finish called at time : 1455 ns : File "/home/quocviet/Project/vlsi_lab/spi/tb/spi_tb.sv" Line 362
+exit
+INFO: xsimkernel Simulation Memory Usage: 292752 KB (Peak: 341312 KB), Simulation CPU Usage: 780 ms
+INFO: [Common 17-206] Exiting xsim at Wed May 20 13:27:22 2026...
